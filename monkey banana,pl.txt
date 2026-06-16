@@ -1,0 +1,35 @@
+initial_state(
+    state(middle, onfloor, middle, notheld)
+).
+
+goal_state(
+    state(_, onfloor, _, held)
+).
+
+move(
+    state(P1, onfloor, B, H),
+    state(P2, onfloor, B, H)
+) :-
+    position(P1),
+    position(P2),
+    P1 \= P2.
+
+climb(
+    state(P, onfloor, P, notheld),
+    state(P, onbox, P, notheld)
+).
+
+grab(
+    state(P, onbox, P, notheld),
+    state(P, onbox, P, held)
+).
+
+position(left).
+position(middle).
+position(right).
+
+% Query:
+% ?- goal_state(state(M, O, B, held)).
+%
+% Output:
+% O = onfloor.
